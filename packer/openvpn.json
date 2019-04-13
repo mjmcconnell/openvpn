@@ -29,6 +29,14 @@
       "inline": [
         "echo Setting up OpenVPN"
       ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "echo 'packer' | sudo -S sh -c 'apt-get update'",
+        "echo 'packer' | sudo -S sh -c 'apt-get install -y nginx'",
+        "echo 'packer' | sudo -S sh -c 'service nginx start'"
+      ]
     }
   ],
   "post-processors": [

@@ -24,6 +24,9 @@ terraform.init:
 terraform.validate:
 	$(COMPOSE_RUN) terraform validate -check-variables=false terraform
 
+terraform.apply: terraform.set_packer_vars terraform.init
+	$(COMPOSE_RUN) terraform apply -var-file="terraform/packer.tfvars" -var-file="terraform/secrets.tfvars" terraform
+
 terraform.deploy: terraform.set_packer_vars terraform.init
 	$(COMPOSE_RUN) terraform apply -auto-approve -var-file="terraform/packer.tfvars" -var-file="terraform/secrets.tfvars" terraform
 
