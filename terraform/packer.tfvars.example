@@ -1,0 +1,4 @@
+aws_amis = {
+  "open_vpn" = "##OPENVPN_AMI_ID##",
+  "ubuntu_box" = "##UBUNTU_AMI_ID##",
+}

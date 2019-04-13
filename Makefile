@@ -14,3 +14,18 @@ packer.build: packer.validate
 packer.clean:
 	rm manifest.openvpn.json
 	rm manifest.ubuntu.json
+
+terraform.set_packer_vars:
+	sh ./scripts/set_terraform_vars.sh
+
+terraform.init:
+	$(COMPOSE_RUN) terraform init terraform
+
+terraform.validate:
+	$(COMPOSE_RUN) terraform validate -check-variables=false terraform
+
+terraform.deploy: terraform.set_packer_vars terraform.init
+	$(COMPOSE_RUN) terraform apply -auto-approve -var-file="terraform/packer.tfvars" -var-file="terraform/secrets.tfvars" terraform
+
+terraform.destroy:
+	$(COMPOSE_RUN) terraform destroy -var-file="terraform/packer.tfvars" -var-file="terraform/secrets.tfvars" terraform
