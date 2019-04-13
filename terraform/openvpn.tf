@@ -3,17 +3,14 @@ resource "aws_instance" "openvpn" {
   ami = "${lookup(var.aws_amis, "open_vpn")}"
   availability_zone = "eu-west-1a"
   instance_type = "t2.micro"
-  key_name = "${aws_key_pair.ubuntu_user.key_name}"
   get_password_data = false
   monitoring = false
-  security_groups = ["${aws_security_group.openvpn_security_group.name}"]
+  security_groups = ["${aws_security_group.openvpn_security_group.id}"]
   subnet_id = "${aws_subnet.public_subnet.id}"
   associate_public_ip_address = true
   tags {
     Name = "openvpn"
   }
-
-  depends_on = ["aws_security_group.openvpn_security_group"]
 }
 
 resource "aws_security_group" "openvpn_security_group" {

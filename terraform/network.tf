@@ -74,3 +74,9 @@ resource "aws_route_table" "rout_table" {
     Name = "OpenVPN_RT"
   }
 }
+
+resource "aws_route_table_association" "rout_table_ass" {
+  subnet_id = "${aws_subnet.public_subnet.id}"
+  route_table_id = "${aws_route_table.rout_table.id}"
+}
+
