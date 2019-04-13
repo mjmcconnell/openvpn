@@ -63,7 +63,7 @@ resource "aws_nat_gateway" "nat_gw" {
   depends_on = ["aws_internet_gateway.internet_gw"]
 }
 
-resource "aws_route_table" "rout_table" {
+resource "aws_route_table" "everything" {
   # https://www.terraform.io/docs/providers/aws/r/route_table.html
   vpc_id = "${aws_vpc.main.id}"
   route {
@@ -75,8 +75,14 @@ resource "aws_route_table" "rout_table" {
   }
 }
 
-resource "aws_route_table_association" "rout_table_ass" {
+resource "aws_route_table_association" "pub" {
   subnet_id = "${aws_subnet.public_subnet.id}"
-  route_table_id = "${aws_route_table.rout_table.id}"
+  route_table_id = "${aws_route_table.everything.id}"
+}
+
+
+resource "aws_route_table_association" "pvt" {
+  subnet_id = "${aws_subnet.private_subnet.id}"
+  route_table_id = "${aws_route_table.everything.id}"
 }
 

@@ -3,6 +3,7 @@ resource "aws_instance" "openvpn" {
   ami = "${lookup(var.aws_amis, "open_vpn")}"
   availability_zone = "eu-west-1a"
   instance_type = "t2.micro"
+  key_name = "${aws_key_pair.ubuntu_user.key_name}"
   get_password_data = false
   monitoring = false
   security_groups = ["${aws_security_group.openvpn_security_group.id}"]
@@ -17,6 +18,13 @@ resource "aws_security_group" "openvpn_security_group" {
   # https://www.terraform.io/docs/providers/aws/r/security_group.html
   name = "openvpn_security_group"
   vpc_id = "${aws_vpc.main.id}"
+
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   ingress {
     from_port = 80

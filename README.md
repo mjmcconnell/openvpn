@@ -50,3 +50,7 @@ Packer images (AMI's and snapshots) can not be automatically cleaned up in this 
 To clean up Terraform generated resources (EC2 instance, Security Group, Key Pair), simply run:
 
     make terraform.destroy
+
+
+## Future changes
+Manage terraform state via S3

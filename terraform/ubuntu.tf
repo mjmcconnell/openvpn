@@ -31,7 +31,7 @@ resource "aws_security_group" "ubuntu_security_group" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["10.0.2.0/24"]
+    cidr_blocks = ["10.0.1.0/24"]
   }
 
   egress {
