@@ -6,7 +6,7 @@ ubuntu
 ubuntu.pub
 
 # Packer
-manifest.json
+manifest.*.json
 packer/secrets.json
 
 # Terraform
