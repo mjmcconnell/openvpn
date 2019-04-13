@@ -1,0 +1,17 @@
+.DS_Store
+*.bak
+
+# SSH keys generated
+ubuntu
+ubuntu.pub
+
+# Packer
+manifest.json
+packer/secrets.json
+
+# Terraform
+.terraform
+terraform.tfstate
+terraform.tfstate.backup
+terraform/packer.tfvars
+terraform/secrets.tfvars
