@@ -21,9 +21,6 @@ There is an example AWS IAM policy in the `packer` directory, with all the corre
 Once the account has been created, create a new file the `/packer/secrets.tfvars` using the contents of `/packer/secrets.tfvars.example`.
 Replace the `aws_access_key` and `aws_secret_key` with the credentials of the packer aws user you created.
 
-Next source the GitLab CI Runner secrets from your GitLab instance. Simply go to your projects page -> settings -> CI / CD, and under "Set up a specific Runner manually" copy the URL and registration token.
-Use this values to replace the `gitlab_url` and `gitlab_token` default values
-
 ### Terraform
 
 Similar to Packer, Terraform will also need to the infrastructure it will be building onto of.
