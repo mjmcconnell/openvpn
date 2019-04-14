@@ -63,7 +63,7 @@ resource "aws_nat_gateway" "nat_gw" {
   depends_on = ["aws_internet_gateway.internet_gw"]
 }
 
-resource "aws_route_table" "everything" {
+resource "aws_route_table" "public" {
   # https://www.terraform.io/docs/providers/aws/r/route_table.html
   vpc_id = "${aws_vpc.main.id}"
   route {
@@ -71,7 +71,19 @@ resource "aws_route_table" "everything" {
     gateway_id = "${aws_internet_gateway.internet_gw.id}"
   }
   tags {
-    Name = "OpenVPN_RT"
+    Name = "PublicRouteTable"
+  }
+}
+
+resource "aws_route_table" "private" {
+  # https://www.terraform.io/docs/providers/aws/r/route_table.html
+  vpc_id = "${aws_vpc.main.id}"
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "${aws_internet_gateway.nat_gw.id}"
+  }
+  tags {
+    Name = "PrivateRouteTable"
   }
 }
 
