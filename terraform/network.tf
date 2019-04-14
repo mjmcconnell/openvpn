@@ -60,7 +60,7 @@ resource "aws_nat_gateway" "nat_gw" {
     Name = "OpenVPN_NG"
   }
 
-  depends_on = ["aws_internet_gateway.internet_gw"]
+  depends_on = ["aws_internet_gatewtay.internet_gw"]
 }
 
 resource "aws_route_table" "public" {
@@ -89,12 +89,12 @@ resource "aws_route_table" "private" {
 
 resource "aws_route_table_association" "pub" {
   subnet_id = "${aws_subnet.public_subnet.id}"
-  route_table_id = "${aws_route_table.everything.id}"
+  route_table_id = "${aws_route_table.public.id}"
 }
 
 
 resource "aws_route_table_association" "pvt" {
   subnet_id = "${aws_subnet.private_subnet.id}"
-  route_table_id = "${aws_route_table.everything.id}"
+  route_table_id = "${aws_route_table.private.id}"
 }
 
